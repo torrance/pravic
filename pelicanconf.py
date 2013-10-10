@@ -36,7 +36,7 @@ THEME = "themes/pravic"
 DISPLAY_PAGES_ON_MENU = False
 DISPLAY_CATEGORIES_ON_MENU = True
 
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'CNAME']
 
 # Remove tags and archives from default list
 DIRECT_TEMPLATES = (('index','categories'))
