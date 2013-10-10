@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Torrance'
 SITENAME = u'Pravic'
-SITEURL = 'http://pravic.net'
+SITEURL = ''
 
 TIMEZONE = 'Pacific/Auckland'
 DEFAULT_DATE_FORMAT = '%d %B %Y'
@@ -29,7 +29,7 @@ SOCIAL = ()
 DEFAULT_PAGINATION = 0
 
 # Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
+RELATIVE_URLS = True
 
 THEME = "themes/pravic"
 
