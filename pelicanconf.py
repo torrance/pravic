@@ -42,3 +42,11 @@ STATIC_PATHS = ['images', 'CNAME']
 DIRECT_TEMPLATES = (('index','categories'))
 
 TYPOGRIFY = True
+
+DELETE_OUTPUT_DIRECTORY = True
+
+ARTICLE_URL = 'posts/{date:%Y}/{date:%b}/{slug}.html'
+ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/{slug}.html'
+# TODO: Style the following pages
+# YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
+# MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
