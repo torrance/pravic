@@ -1,0 +1,187 @@
+/**
+ * Banner
+ */
+#banner {
+  padding: 20px 0;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+#banner h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#banner h1 a {
+  color: #333332;
+}
+
+#banner h1  a:hover {
+  color: #D25437;
+}
+
+/**
+ * Banner
+ */
+
+#menu ul {
+  position: absolute;
+  right: 0;
+  top: -57px;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+#menu ul li {
+  display: inline-block;
+}
+
+#menu a {
+  font-family: 'Open Sans', sans-serif;
+  display: inline;
+  font-weight: 300;
+  margin-left: 20px;
+  color: #999999;
+}
+
+#menu a:hover {
+  color: #333332;
+}
+
+/**
+ * Index page
+ */
+
+#post-list {
+  margin: 25px 0 35px 40px;
+}
+
+#post-list li {
+  margin-bottom: 30px;
+  line-height: 18px;
+}
+
+#post-list h2 {
+  margin: 0 0 5px 0;
+}
+
+#post-list .published {
+  font-style: italic;
+  font-size: 12px;
+  margin: 0;
+}
+
+/**
+ * Article page
+ */
+.dark-background {
+  background: #333332;
+  color: #fff;
+}
+
+.dark-background a {
+  color: #fff;
+}
+
+.dark-background a:hover {
+  color: #D25437;
+}
+
+#content.article  .dark-background {
+  padding: 30px 0;
+}
+
+#content.article .article-image img {
+  margin-top: -30px;
+  margin-bottom: 30px;
+  max-width: 100%;
+}
+
+#content.article  .category,
+#recent-articles h4 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #999999;
+  text-transform: uppercase;
+  border-bottom: 1px solid #777;
+  margin: 0;
+  margin-bottom: 15px;
+  line-height: 30px;
+}
+
+#content.article  h2 {
+  font-size: 36px;
+  line-height: 50px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+#content.article  .summary p {
+  font-size: 24px;
+  font-style: italic;
+  margin: 0;
+}
+
+#content.article  .entry-content {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#content.article  .entry-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+#content.article  .entry-content blockquote {
+  color: #999999;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 36px;
+  padding: 0 20px 0 36px;
+  margin-bottom: 35px;
+  border-left: 4px solid #CCCCCC;
+}
+
+.highlighttable .linenos {
+  color: #999;
+}
+
+#content.article  footer {
+  color: #999999;
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#content.article footer abbr {
+  display: inline;
+}
+
+#recent-articles {
+  padding: 30px 0;
+}
+
+#recent-articles ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+#recent-articles ul li span {
+  float: right;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  color: #999;
+}
+
+/**
+ * Sitewide footer
+ */
+
+#contentinfo {
+  font-size: 11px;
+  line-height: 30px;
+}

@@ -1,0 +1,4 @@
+ENV
+*.pid
+*.pyc
+/output

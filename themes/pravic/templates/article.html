@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block head %}
+  {{ super() }}
+  {% for keyword in article.keywords %}
+    <meta name="keywords" contents="{{keyword}}" />
+  {% endfor %}
+
+  {% for description in article.description %}
+    <meta name="description" contents="{{description}}" />
+  {% endfor %}
+
+  {% for tag in article.tags %}
+    <meta name="tags" contents="{{tag}}" />
+  {% endfor %}
+
+{% endblock %}
+
+{% block content %}
+<section id="content" class="body article">
+  <div class="dark-background">
+    {% if article.image %}
+    <div class="article-image">
+      <img src="{{ SITEURL }}/images/{{ article.image }}" />
+    </div>
+    {% endif %}
+    <header>
+      <div class="category">{{ article.category }}</div>
+      <h2 class="entry-title">
+        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+           title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
+   {% import 'translations.html' as translations with context %}
+   {{ translations.translations_for(article) }}
+      <div class="summary">{{ article.summary }}</div>
+    </header>
+  </div><!-- /.dark-background -->
+  <div class="entry-content">
+    {{ article.content }}
+  </div><!-- /.entry-content -->
+  <footer class="post-info">
+    Published <abbr class="published" title="{{ article.date.isoformat() }}">{{ article.locale_date }}</abbr>
+    {% if article.author %}
+    by {{ article.author }}
+    {% endif %}
+  </footer><!-- /.post-info -->
+</section>
+
+{% if articles %}
+<div class="dark-background">
+  <div id="recent-articles">
+    <h4>Previous posts</h4>
+    <ul>
+    {% for other_article in articles | reject("sameas", article) %}
+      <li>
+        <a href="{{ SITEURL }}/{{ other_article.url }}" rel="bookmark" title="Permalink to {{ other_article.title|striptags }}">{{ other_article.title }}</a>
+        <span>published {{ other_article.locale_date }}</span></li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
