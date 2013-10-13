@@ -25,9 +25,7 @@
     {% endif %}
     <header>
       <div class="category">{{ article.category }}</div>
-      <h2 class="entry-title">
-        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
-           title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
+      <h2 class="entry-title">{{ article.title }}</h2>
    {% import 'translations.html' as translations with context %}
    {{ translations.translations_for(article) }}
       <div class="summary">{{ article.summary }}</div>
