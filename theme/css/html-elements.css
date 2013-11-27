@@ -63,11 +63,23 @@ ol {
   margin-left: 2em;
 }
 
-pre {
-  font-family: menlas, monospace;
+pre, code {
+  font-family: monospace;
   line-height: 1.4em;
+  font-size: 14px;
+}
+
+p code {
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 2px;
 }
 
 table {
   width: 100%;
+}
+
+.caps {
+  font-size: 0.9em;
 }

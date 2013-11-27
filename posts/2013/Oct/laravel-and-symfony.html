@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Pravic</title>
+        <meta charset="utf-8" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="Pravic Full RSS Feed" />
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="http://pravic.net/theme/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="http://pravic.net/theme/css/html-elements.css" rel="stylesheet" type="text/css" />
+    <link href="http://pravic.net/theme/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="http://pravic.net/theme/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="http://pravic.net/theme/css/pygment.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="initial-scale=1">
+
+
+
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://pravic.net">Pravic <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+              <li><a href="http://pravic.net/category/anarchism.html">Anarchism</a></li>
+              <li class="active"><a href="http://pravic.net/category/coding.html">Coding</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body article">
+  <div class="dark-background">
+    <header>
+      <div class="category">Coding</div>
+      <h2 class="entry-title">Laravel <span class="amp">&amp;</span>&nbsp;Symfony</h2>
+   
+      <div class="summary"><p>Comparing two PHP web frameworks</p></div>
+    </header>
+  </div><!-- /.dark-background -->
+  <div class="entry-content">
+    <p>I was recently tasked with building an heavily customised interface for a specific workflow as part of a arguably legacy <span class="caps">CRM</span> application. Rather than attempt to built the interface as part of the application, we made the decision to start anew and speak directly to the backend database instead. So lucky me, I had the opportunity to evaluate two rising stars in the <span class="caps">PHP</span> framework world: <a href="http://laravel.com/">Laravel</a> and <a href="http://symfony.com/">Symfony</a>.</p>
+<p>My bread and butter is Drupal coding accompanied by an ongoing battle with said <span class="caps">CRM</span> application (which shall remain nameless, though a quick <a href="http://arresteddevelopment.wikia.com/wiki/Do_a_something_search">something search</a> will easily turn it up). Both are at heart legacy <span class="caps">PHP</span> applications, full of anachronisms, tight coupling and are oh-so-brittle, and both had soured my opinion of <span class="caps">PHP</span> as a language in general. So when I have previously had the chance to start a web app from starters, I’ve invariably turned to Ruby (<a href="http://rubyonrails.org/">Rails</a>) or Python (<a href="http://flask.pocoo.org/">Flask</a>).</p>
+<p>But Laravel and Symfony represent a new breed of <span class="caps">PHP</span> application. They represent the arrival of some decent <span class="caps">PHP</span> and general comp-sci best practices coupled with the full use of new language tools (namespaces, closures, &#8230;.), and I&#8217;ve found these frameworks actually quite robust and something of a&nbsp;pleasure.</p>
+<p>Symfony and Laravel are more similar than they are different. They’re both fairly stock standard <span class="caps">MVC</span> frameworks, and in fact Laravel makes use of a number of low-level components from Symfony. Just as importantly, they’re both quite flexible and most components can be swapped out for others, so this is a comparison of their <em>defaults</em> as much as it is of each of the&nbsp;frameworks.</p>
+<p>But&nbsp;first…</p>
+<h2>Why&nbsp;<span class="caps">PHP</span>?</h2>
+<p>In this case, <span class="caps">PHP</span> is the lingua franca at work so for the simple reason of the maintainability <span class="caps">PHP</span> had to be the&nbsp;answer.</p>
+<p><a href="http://me.veekun.com/blog/2012/04/09/php-a-fractal-of-bad-design/"><span class="caps">PHP</span> isn’t a great language.</a> There are plenty of things not to like, like its weak typing and implicit conversions, the inconsistent and arguably broken parts of the standard library, and the weird language influences of C, Perl and Java all jarring against each other. Using the language well and staying away from writing ambiguous or undefined code requires restricting yourself, much like with javascript, to using only its ‘good parts’ (and I’ll take <span class="caps">PHP</span>’s object model over javascript’s prototypal inheritance&nbsp;anyday).</p>
+<p>But some of the <span class="caps">PHP</span> hate is hate from a previous era, and some is hate-by-association, whether because it has has attracted more than its share of bad programmers or because it has more than its share of abominable code out in the wild. In recent years <span class="caps">PHP</span> has definitely matured: its object model has been perfectly usable since <span class="caps">PHP</span> 5; shared standards are being written and widely adopted (<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md"><span class="caps">PSR</span>-0</a>, <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md"><span class="caps">PSR</span>-1</a>, <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md"><span class="caps">PSR</span>-2</a>, <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md"><span class="caps">PSR</span>-3</a>); associated tooling is being written making it easier than ever to reuse code (eg. <a href="http://getcomposer.org/">Composer</a>); and in general it’s attracting a higher quality of more loosely coupled code. And Symfony and Laravel are definitely examples of this new&nbsp;wave.</p>
+<h2>ORMs: Eloquent versus Doctrine&nbsp;2</h2>
+<p>Comparing the ORMs of Laravel and Symfony is really about comparing two different approaches to <span class="caps">ORM</span> design: <a href="http://en.wikipedia.org/wiki/Active_record_pattern">ActiveRecord</a> versus <a href="http://en.wikipedia.org/wiki/Data_mapper_pattern">DataMapper</a>. First some code&nbsp;examples.</p>
+<h3>Laravel&#8217;s&nbsp;Eloquent</h3>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Define user model</span>
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Eloquent</span>
+<span class="p">{</span>
+    <span class="c1">// Optionally explicitly name table</span>
+    <span class="k">protected</span> <span class="nv">$table</span> <span class="o">=</span> <span class="s1">&#39;users&#39;</span><span class="p">;</span>
+
+    <span class="c1">// Set up association, default joins users &#39;id&#39; to comment column &#39;user_id&#39;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">comments</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasMany</span><span class="p">(</span><span class="s1">&#39;Comment&#39;</span><span class="p">);</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Now query for model from database</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;100&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">take</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$users</span> <span class="k">as</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">print</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+
+    <span class="c1">// Lazy-load comments by association</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">comments</span> <span class="k">as</span> <span class="nv">$comment</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">print</span> <span class="nv">$comment</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Persist name change in database</span>
+    <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s2">&quot;Peter Kropotkin&quot;</span><span class="p">;</span>
+    <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>There&#8217;s a lot of magic happening here and Eloquent benefits by being very compact. Just like in Rails, Eloquent attaches a query builder language as static methods on your models. The resulting object will have all your database columns available as publicly accessible properties which can be read, modified and persisted by using a number of inherited methods such as <code>save()</code>.</p>
+<h3>Symfony&#8217;s Doctrine&nbsp;2</h3>
+<p>Symfony&#8217;s Doctrine is much more explicit at the expense of being an order of magnitude more verbose. A typical model (which is known as an <em>entity</em> in symfony) would look like&nbsp;this:</p>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">Pravic\MyBundle\Entity</span>
+
+<span class="k">use</span> <span class="nx">Doctrine\<span class="caps">ORM</span>\Mapping</span> <span class="k">as</span> <span class="nx"><span class="caps">ORM</span></span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserInterface</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @<span class="caps">ORM</span>\Entity</span>
+<span class="sd"> * @<span class="caps">ORM</span>\Table(name=&quot;user&quot;)</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @<span class="caps">ORM</span>\Column(type=&quot;integer&quot;)</span>
+<span class="sd">     * @<span class="caps">ORM</span>\Id</span>
+<span class="sd">     * @<span class="caps">ORM</span>\GeneratedValue(strategy=&quot;<span class="caps">AUTO</span>&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">protected</span> <span class="nv">$id</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @<span class="caps">ORM</span>\OneToMany(targetEntity=&quot;Comment&quot;, mappedBy=&quot;user&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">protected</span> <span class="nv">$comments</span><span class="p">;</span>
+
+    <span class="c1">// ... other properties</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">comments</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayCollection</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nx">getId</span><span class="p">()</span>
+    <span class="p">{</span>
+       <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nx">setId</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+       <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ... other getters and setters</span>
+<span class="p">}</span>
+
+<span class="c1">// And then in your controller...</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="s1">&#39;PravicMyBundle:User&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id &gt; 100&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setMaxResults</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getResult</span><span class="p">();</span>
+
+<span class="nv">$em</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getManager</span><span class="p">();</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$users</span> <span class="k">as</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">print</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+
+    <span class="c1">// Lazy-load comments by association</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getComments</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$comment</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">print</span> <span class="nv">$comment</span><span class="o">-&gt;</span><span class="na">getTitle</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Persist name change in database</span>
+    <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s2">&quot;Peter Kropotkin&quot;</span><span class="p">);</span>
+    <span class="nv">$em</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nv">$em</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span> <span class="c1">// Writes all pending updates to database</span>
+</pre></div>
+
+
+<p>It&#8217;s a lot more code than Eloquent! Thankfully to avoid some of the pain, Symfony provides a helper script that will automatically create your setters and getters based on your properties: <code>php app/console doctrine:generate:entities Pravic/MyBundle/Entity/User</code>.</p>
+<p>A few things of note. First, that all object properties are accessed via getters and setters providing sensible encapsulation of your object. Second, that Symfony uses namespaces for all application code, whereas Laravel objects exist in the global namespace. And that, in general, there&#8217;s very little magic happening here: column mappings are all explicitly mapped via Doctrine&#8217;s special annotation syntax, properties need to be declared, and association properties need to be initialised to sane&nbsp;defaults.</p>
+<p>The great advantage that Doctrine offers over Eloquent is its <a href="http://doctrine-orm.readthedocs.org/en/2.0.x/reference/dql-doctrine-query-language.html"><span class="caps">DQL</span> query language</a>. <span class="caps">DQL</span> allows for you to construct elaborate queries to load your objects from the database in a style that is almost as flexible as raw <span class="caps">SQL</span>. This for me is a killer feature as even in simple projects I regularly find myself battling with the <span class="caps">ORM</span> and invariably having to drop down to <span class="caps">SQL</span>, which causes headaches of its own. So take the following example, where I eager-load user&nbsp;comments:</p>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getManager</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="s1">&#39;</span>
+<span class="s1">        <span class="caps">SELECT</span> u, c <span class="caps">FROM</span> PravicMyBundle:User u</span>
+<span class="s1">        <span class="caps">LEFT</span> <span class="caps">JOIN</span> comments c</span>
+<span class="s1">        <span class="caps">WHERE</span> u.id &gt; 100</span>
+<span class="s1">        <span class="caps">LIMIT</span> 5</span>
+<span class="s1">    &#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getResult</span><span class="p">();</span>
+</pre></div>
+
+
+<p>Remember, I&#8217;m describing a query of my <em>entities</em>, not what&#8217;s in the database. So &#8216;column&#8217; names are however the properties on my objects are named. And the join is based on my mapping, so there&#8217;s no need to describe <em>how</em> the join&nbsp;occurs.</p>
+<h3>Verdict</h3>
+<p>Which you prefer is largely a matter of whether you prefer an ActiveRecord or DataMapper style <span class="caps">ORM</span>. Having personally started with all the magic of ActiveRecord in Rails, I&#8217;ve come to the opposing conclusion that being explicit is often worth the extra lines. I don&#8217;t want to have to look at my database and to know the rules about how column names are mapped (capitalisation, pluralisation, etc.) to be able to work out which properties or methods are going to be available to me on my&nbsp;object. </p>
+<p>Additionally, ActiveRecord encourages writing objects that are concerned with two very different things—business logic and persistance—and thus breaks the <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">single responsibility principle</a>. This isn&#8217;t simply academic either. After working on an app with an ActiveRecord <span class="caps">ORM</span>, it becomes increasingly difficult to distinguish which methods are concerned with querying for and loading the model, and which are concerned with the actual business logic of the model&nbsp;itself.</p>
+<p>Lastly, <span class="caps">DQL</span> is simply <em>wonderful</em>. It was wrangling with a particuarly nasty query using Eloquent that first made me eye up Symfony&#8217;s Doctrine instead, after initially being a little intimidated by&nbsp;it.</p>
+  </div><!-- /.entry-content -->
+  <footer class="post-info">
+    Published <abbr class="published" title="2013-10-24T00:00:00">24 October 2013</abbr>
+    by Torrance
+  </footer><!-- /.post-info -->
+</section>
+
+<div class="dark-background">
+  <div id="recent-articles">
+    <h4>Previous posts</h4>
+    <ul>
+      <li>
+        <a href="http://pravic.net/posts/2013/Oct/on-deflation.html" rel="bookmark" title="Permalink to On deflation">On&nbsp;deflation</a>
+        <span>published 11 October 2013</span></li>
+    </ul>
+  </div>
+</div>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>

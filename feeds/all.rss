@@ -1,5 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pravic</title><link>http://pravic.net/</link><description></description><atom:link href="/feeds/all.rss" rel="self"></atom:link><lastBuildDate>Fri, 11 Oct 2013 17:12:00 +1300</lastBuildDate><item><title>On deflation</title><link>http://pravic.net/posts/2013/Oct/on-deflation.html</link><description>&lt;p&gt;Deflation is  good word for it. It is the sense of hope and expectations gone awry. I was young when I first became involved in anarchist politics and was filled with the optimism and belief that change on the scale envisioned by anarchist thinkers was not just possible but, in actual fact, inevitable. It would be spurred into form by simultaneous impending crises and an upswing in consciousness, of what was really possible in the ordering of human relations. It’s hard to put it into words, but there was a kind of fantastical element to it, a sense that what existed in the mind could be transformed at will into lived social&amp;nbsp;realities.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pravic</title><link>http://pravic.net/</link><description></description><atom:link href="/feeds/all.rss" rel="self"></atom:link><lastBuildDate>Thu, 24 Oct 2013 00:00:00 +1300</lastBuildDate><item><title>Laravel &amp; Symfony</title><link>http://pravic.net/posts/2013/Oct/laravel-and-symfony.html</link><description>&lt;p&gt;I was recently tasked with building an heavily customised interface for a specific workflow as part of a arguably legacy &lt;span class="caps"&gt;CRM&lt;/span&gt; application. Rather than attempt to built the interface as part of the application, we made the decision to start anew and speak directly to the backend database instead. So lucky me, I had the opportunity to evaluate two rising stars in the &lt;span class="caps"&gt;PHP&lt;/span&gt; framework world: &lt;a href="http://laravel.com/"&gt;Laravel&lt;/a&gt; and &lt;a href="http://symfony.com/"&gt;Symfony&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;My bread and butter is Drupal coding accompanied by an ongoing battle with said &lt;span class="caps"&gt;CRM&lt;/span&gt; application (which shall remain nameless, though a quick &lt;a href="http://arresteddevelopment.wikia.com/wiki/Do_a_something_search"&gt;something search&lt;/a&gt; will easily turn it up). Both are at heart legacy &lt;span class="caps"&gt;PHP&lt;/span&gt; applications, full of anachronisms, tight coupling and are oh-so-brittle, and both had soured my opinion of &lt;span class="caps"&gt;PHP&lt;/span&gt; as a language in general. So when I have previously had the chance to start a web app from starters, I’ve invariably turned to Ruby (&lt;a href="http://rubyonrails.org/"&gt;Rails&lt;/a&gt;) or Python (&lt;a href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;But Laravel and Symfony represent a new breed of &lt;span class="caps"&gt;PHP&lt;/span&gt; application. They represent the arrival of some decent &lt;span class="caps"&gt;PHP&lt;/span&gt; and general comp-sci best practices coupled with the full use of new language tools (namespaces, closures, &amp;#8230;.), and I&amp;#8217;ve found these frameworks actually quite robust and something of a&amp;nbsp;pleasure.&lt;/p&gt;
+&lt;p&gt;Symfony and Laravel are more similar than they are different. They’re both fairly stock standard &lt;span class="caps"&gt;MVC&lt;/span&gt; frameworks, and in fact Laravel makes use of a number of low-level components from Symfony. Just as importantly, they’re both quite flexible and most components can be swapped out for others, so this is a comparison of their &lt;em&gt;defaults&lt;/em&gt; as much as it is of each of the&amp;nbsp;frameworks.&lt;/p&gt;
+&lt;p&gt;But&amp;nbsp;first…&lt;/p&gt;
+&lt;h2&gt;Why&amp;nbsp;&lt;span class="caps"&gt;PHP&lt;/span&gt;?&lt;/h2&gt;
+&lt;p&gt;In this case, &lt;span class="caps"&gt;PHP&lt;/span&gt; is the lingua franca at work so for the simple reason of the maintainability &lt;span class="caps"&gt;PHP&lt;/span&gt; had to be the&amp;nbsp;answer.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://me.veekun.com/blog/2012/04/09/php-a-fractal-of-bad-design/"&gt;&lt;span class="caps"&gt;PHP&lt;/span&gt; isn’t a great language.&lt;/a&gt; There are plenty of things not to like, like its weak typing and implicit conversions, the inconsistent and arguably broken parts of the standard library, and the weird language influences of C, Perl and Java all jarring against each other. Using the language well and staying away from writing ambiguous or undefined code requires restricting yourself, much like with javascript, to using only its ‘good parts’ (and I’ll take &lt;span class="caps"&gt;PHP&lt;/span&gt;’s object model over javascript’s prototypal inheritance&amp;nbsp;anyday).&lt;/p&gt;
+&lt;p&gt;But some of the &lt;span class="caps"&gt;PHP&lt;/span&gt; hate is hate from a previous era, and some is hate-by-association, whether because it has has attracted more than its share of bad programmers or because it has more than its share of abominable code out in the wild. In recent years &lt;span class="caps"&gt;PHP&lt;/span&gt; has definitely matured: its object model has been perfectly usable since &lt;span class="caps"&gt;PHP&lt;/span&gt; 5; shared standards are being written and widely adopted (&lt;a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md"&gt;&lt;span class="caps"&gt;PSR&lt;/span&gt;-0&lt;/a&gt;, &lt;a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md"&gt;&lt;span class="caps"&gt;PSR&lt;/span&gt;-1&lt;/a&gt;, &lt;a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md"&gt;&lt;span class="caps"&gt;PSR&lt;/span&gt;-2&lt;/a&gt;, &lt;a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md"&gt;&lt;span class="caps"&gt;PSR&lt;/span&gt;-3&lt;/a&gt;); associated tooling is being written making it easier than ever to reuse code (eg. &lt;a href="http://getcomposer.org/"&gt;Composer&lt;/a&gt;); and in general it’s attracting a higher quality of more loosely coupled code. And Symfony and Laravel are definitely examples of this new&amp;nbsp;wave.&lt;/p&gt;
+&lt;h2&gt;ORMs: Eloquent versus Doctrine&amp;nbsp;2&lt;/h2&gt;
+&lt;p&gt;Comparing the ORMs of Laravel and Symfony is really about comparing two different approaches to &lt;span class="caps"&gt;ORM&lt;/span&gt; design: &lt;a href="http://en.wikipedia.org/wiki/Active_record_pattern"&gt;ActiveRecord&lt;/a&gt; versus &lt;a href="http://en.wikipedia.org/wiki/Data_mapper_pattern"&gt;DataMapper&lt;/a&gt;. First some code&amp;nbsp;examples.&lt;/p&gt;
+&lt;h3&gt;Laravel&amp;#8217;s&amp;nbsp;Eloquent&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Define user model&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Eloquent&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// Optionally explicitly name table&lt;/span&gt;
+    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="nv"&gt;$table&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;users&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Set up association, default joins users &amp;#39;id&amp;#39; to comment column &amp;#39;user_id&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;comments&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;hasMany&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Comment&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+     &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Now query for model from database&lt;/span&gt;
+&lt;span class="nv"&gt;$users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;User&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="na"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;100&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;take&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="k"&gt;foreach&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$users&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Lazy-load comments by association&lt;/span&gt;
+    &lt;span class="k"&gt;foreach&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;comments&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;$comment&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nv"&gt;$comment&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Persist name change in database&lt;/span&gt;
+    &lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Peter Kropotkin&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;save&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There&amp;#8217;s a lot of magic happening here and Eloquent benefits by being very compact. Just like in Rails, Eloquent attaches a query builder language as static methods on your models. The resulting object will have all your database columns available as publicly accessible properties which can be read, modified and persisted by using a number of inherited methods such as &lt;code&gt;save()&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;Symfony&amp;#8217;s Doctrine&amp;nbsp;2&lt;/h3&gt;
+&lt;p&gt;Symfony&amp;#8217;s Doctrine is much more explicit at the expense of being an order of magnitude more verbose. A typical model (which is known as an &lt;em&gt;entity&lt;/em&gt; in symfony) would look like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class="k"&gt;namespace&lt;/span&gt; &lt;span class="nx"&gt;Pravic\MyBundle\Entity&lt;/span&gt;
+
+&lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="nx"&gt;Doctrine\&lt;span class="caps"&gt;ORM&lt;/span&gt;\Mapping&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;&lt;span class="caps"&gt;ORM&lt;/span&gt;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;use&lt;/span&gt; &lt;span class="nx"&gt;Symfony\Component\Security\Core\User\UserInterface&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="sd"&gt;/**&lt;/span&gt;
+&lt;span class="sd"&gt; * @&lt;span class="caps"&gt;ORM&lt;/span&gt;\Entity&lt;/span&gt;
+&lt;span class="sd"&gt; * @&lt;span class="caps"&gt;ORM&lt;/span&gt;\Table(name=&amp;quot;user&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt; */&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="sd"&gt;/**&lt;/span&gt;
+&lt;span class="sd"&gt;     * @&lt;span class="caps"&gt;ORM&lt;/span&gt;\Column(type=&amp;quot;integer&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;     * @&lt;span class="caps"&gt;ORM&lt;/span&gt;\Id&lt;/span&gt;
+&lt;span class="sd"&gt;     * @&lt;span class="caps"&gt;ORM&lt;/span&gt;\GeneratedValue(strategy=&amp;quot;&lt;span class="caps"&gt;AUTO&lt;/span&gt;&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;     */&lt;/span&gt;
+    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="nv"&gt;$id&lt;/span&gt;
+
+    &lt;span class="sd"&gt;/**&lt;/span&gt;
+&lt;span class="sd"&gt;     * @&lt;span class="caps"&gt;ORM&lt;/span&gt;\OneToMany(targetEntity=&amp;quot;Comment&amp;quot;, mappedBy=&amp;quot;user&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;     */&lt;/span&gt;
+    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="nv"&gt;$comments&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// ... other properties&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;__construct&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;comments&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;ArrayCollection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nx"&gt;getId&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nx"&gt;setId&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$id&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+       &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// ... other getters and setters&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;// And then in your controller...&lt;/span&gt;
+&lt;span class="nv"&gt;$users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getDoctrine&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getRepository&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;PravicMyBundle:User&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id &amp;gt; 100&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;setMaxResults&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getQuery&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getResult&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="nv"&gt;$em&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getDoctrine&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getManager&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="k"&gt;foreach&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$users&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getName&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Lazy-load comments by association&lt;/span&gt;
+    &lt;span class="k"&gt;foreach&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getComments&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;$comment&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nv"&gt;$comment&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getTitle&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// Persist name change in database&lt;/span&gt;
+    &lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;setName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Peter Kropotkin&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="nv"&gt;$em&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;persist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$user&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nv"&gt;$em&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;flush&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// Writes all pending updates to database&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It&amp;#8217;s a lot more code than Eloquent! Thankfully to avoid some of the pain, Symfony provides a helper script that will automatically create your setters and getters based on your properties: &lt;code&gt;php app/console doctrine:generate:entities Pravic/MyBundle/Entity/User&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A few things of note. First, that all object properties are accessed via getters and setters providing sensible encapsulation of your object. Second, that Symfony uses namespaces for all application code, whereas Laravel objects exist in the global namespace. And that, in general, there&amp;#8217;s very little magic happening here: column mappings are all explicitly mapped via Doctrine&amp;#8217;s special annotation syntax, properties need to be declared, and association properties need to be initialised to sane&amp;nbsp;defaults.&lt;/p&gt;
+&lt;p&gt;The great advantage that Doctrine offers over Eloquent is its &lt;a href="http://doctrine-orm.readthedocs.org/en/2.0.x/reference/dql-doctrine-query-language.html"&gt;&lt;span class="caps"&gt;DQL&lt;/span&gt; query language&lt;/a&gt;. &lt;span class="caps"&gt;DQL&lt;/span&gt; allows for you to construct elaborate queries to load your objects from the database in a style that is almost as flexible as raw &lt;span class="caps"&gt;SQL&lt;/span&gt;. This for me is a killer feature as even in simple projects I regularly find myself battling with the &lt;span class="caps"&gt;ORM&lt;/span&gt; and invariably having to drop down to &lt;span class="caps"&gt;SQL&lt;/span&gt;, which causes headaches of its own. So take the following example, where I eager-load user&amp;nbsp;comments:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class="nv"&gt;$users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$this&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getDoctrine&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getManager&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;createQuery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;        &lt;span class="caps"&gt;SELECT&lt;/span&gt; u, c &lt;span class="caps"&gt;FROM&lt;/span&gt; PravicMyBundle:User u&lt;/span&gt;
+&lt;span class="s1"&gt;        &lt;span class="caps"&gt;LEFT&lt;/span&gt; &lt;span class="caps"&gt;JOIN&lt;/span&gt; comments c&lt;/span&gt;
+&lt;span class="s1"&gt;        &lt;span class="caps"&gt;WHERE&lt;/span&gt; u.id &amp;gt; 100&lt;/span&gt;
+&lt;span class="s1"&gt;        &lt;span class="caps"&gt;LIMIT&lt;/span&gt; 5&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;getResult&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Remember, I&amp;#8217;m describing a query of my &lt;em&gt;entities&lt;/em&gt;, not what&amp;#8217;s in the database. So &amp;#8216;column&amp;#8217; names are however the properties on my objects are named. And the join is based on my mapping, so there&amp;#8217;s no need to describe &lt;em&gt;how&lt;/em&gt; the join&amp;nbsp;occurs.&lt;/p&gt;
+&lt;h3&gt;Verdict&lt;/h3&gt;
+&lt;p&gt;Which you prefer is largely a matter of whether you prefer an ActiveRecord or DataMapper style &lt;span class="caps"&gt;ORM&lt;/span&gt;. Having personally started with all the magic of ActiveRecord in Rails, I&amp;#8217;ve come to the opposing conclusion that being explicit is often worth the extra lines. I don&amp;#8217;t want to have to look at my database and to know the rules about how column names are mapped (capitalisation, pluralisation, etc.) to be able to work out which properties or methods are going to be available to me on my&amp;nbsp;object. &lt;/p&gt;
+&lt;p&gt;Additionally, ActiveRecord encourages writing objects that are concerned with two very different things—business logic and persistance—and thus breaks the &lt;a href="http://en.wikipedia.org/wiki/Single_responsibility_principle"&gt;single responsibility principle&lt;/a&gt;. This isn&amp;#8217;t simply academic either. After working on an app with an ActiveRecord &lt;span class="caps"&gt;ORM&lt;/span&gt;, it becomes increasingly difficult to distinguish which methods are concerned with querying for and loading the model, and which are concerned with the actual business logic of the model&amp;nbsp;itself.&lt;/p&gt;
+&lt;p&gt;Lastly, &lt;span class="caps"&gt;DQL&lt;/span&gt; is simply &lt;em&gt;wonderful&lt;/em&gt;. It was wrangling with a particuarly nasty query using Eloquent that first made me eye up Symfony&amp;#8217;s Doctrine instead, after initially being a little intimidated by&amp;nbsp;it.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Torrance</dc:creator><pubDate>Thu, 24 Oct 2013 00:00:00 +1300</pubDate><guid>tag:pravic.net,2013-10-24:posts/2013/Oct/laravel-and-symfony.html</guid></item><item><title>On deflation</title><link>http://pravic.net/posts/2013/Oct/on-deflation.html</link><description>&lt;p&gt;Deflation is  good word for it. It is the sense of hope and expectations gone awry. I was young when I first became involved in anarchist politics and was filled with the optimism and belief that change on the scale envisioned by anarchist thinkers was not just possible but, in actual fact, inevitable. It would be spurred into form by simultaneous impending crises and an upswing in consciousness, of what was really possible in the ordering of human relations. It’s hard to put it into words, but there was a kind of fantastical element to it, a sense that what existed in the mind could be transformed at will into lived social&amp;nbsp;realities.&lt;/p&gt;
 &lt;p&gt;Those were of course the heady days of the ‘anti-globalisation’ movement. I got involved sometime towards the end of 2002, and whilst some claim that 9/11 was the death knell for this movement there was still a kind of optimism that persisted in this corner of the world for a couple of years more yet. One wonders though whether, 9/11 or not, this movement would have petered out anyway; whilst some (&lt;a href="http://news.infoshop.org/article.php?story=2007graeber-victory"&gt;including David Graeber&lt;/a&gt;) have argued that the big protests of this era really did straightjacket the big three (&lt;span class="caps"&gt;IMF&lt;/span&gt;, World Bank, &lt;span class="caps"&gt;WTO&lt;/span&gt;), there’s only so long that a movement can survive on ‘summit hopping’&amp;nbsp;alone. &lt;/p&gt;
 &lt;p&gt;Needless to say, anarchism hasn’t happened yet. And its hard not to feel deflated when coming down from a high of this kind of&amp;nbsp;certitude.&lt;/p&gt;
 &lt;p&gt;Its easy to devote yourself to something, even at great expense, when you feel certain of a payoff of unimaginable scale. But without this expected payoff, I find myself struggling to find the energy and enthusiasm to devote to anarchist projects. And those projects in which I’m solidly enmeshed become more and more like trudging through a mire of obligation. Cynicism begins to creep in too. One finds oneself watching other projects with a case of déjà vu and a smug surety of their failure, and I don’t want to be that&amp;nbsp;guy.&lt;/p&gt;
